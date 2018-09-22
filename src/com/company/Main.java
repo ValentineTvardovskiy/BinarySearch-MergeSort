@@ -7,9 +7,6 @@ public class Main {
         int[] a = { 5,6,9,10,15,1,3,4 };
         int[] b = { 5,5,1,3,4,5,5,5,5 };
         int[] c = { 1,2,3,3,4,4,4,4,4 };
-        //5,6,9,10,15,1,3,4
-        //5,5,1,3,4,5,5,5,5
-        //1,2,3,3,3,3,3,3,3
 
         System.out.println(search(a, 5));
         System.out.println(search(a, 1));
@@ -33,7 +30,7 @@ public class Main {
 
     public static int search(int a[], int left, int right, int x) {
         int mid = (left + right) / 2;
-        
+
         if (x == a[0]){
             return 0;
         }
@@ -56,23 +53,4 @@ public class Main {
         }
         return -1;
     }
-/*
-    private static int binarySearch0(int[] a, int fromIndex, int toIndex, int key) {
-        int low = fromIndex;
-        int high = toIndex - 1;
-
-        while (low <= high) {
-            int mid = (low + high) >>> 1;
-            int midVal = a[mid];
-
-            if (midVal < key)
-                low = mid + 1;
-            else if (midVal > key)
-                high = mid - 1;
-            else
-                return mid; // key found
-        }
-        return -(low + 1);  // key not found.
-    }
-*/
 }
