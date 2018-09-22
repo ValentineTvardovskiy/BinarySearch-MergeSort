@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -20,15 +22,16 @@ public class Main {
         System.out.println(search(c, 3));
         System.out.println(search(c, 2));
 
+        int[] z = {7, 3, 18, 10, 9, 24, 17, 46, 32};
+        sort(z);
+        System.out.println(Arrays.toString(z));
 
     }
 
     public static int search(int a[], int x) {
         return search(a, 0, a.length - 1, x);
     }
-
-
-    public static int search(int a[], int left, int right, int x) {
+    private static int search(int a[], int left, int right, int x) {
         int mid = (left + right) / 2;
 
         if (x == a[0]){
@@ -40,7 +43,6 @@ public class Main {
         if (right < left) {
             return -1;
         }
-
         if (a[left] < a[mid]) {
             return (x >= a[left] && x < a[mid]) ?
                     search(a, left, mid - 1, x) : search(a, mid + 1, right, x);
@@ -52,5 +54,40 @@ public class Main {
                     search(a, mid + 1, right, x) : search(a, left, mid - 1, x);
         }
         return -1;
+    }
+
+    public static void sort(int[] arr) {
+        sortArr(arr, 0, arr.length - 1);
+    }
+    private static void sortArr(int[] arr, int lowerBound, int upperBound) {
+        if (lowerBound < upperBound) {
+            int mid = (lowerBound + upperBound) / 2;
+            sortArr(arr, lowerBound, mid);
+            sortArr(arr, mid + 1, upperBound);
+            merge(arr, lowerBound, mid, upperBound);
+        }
+    }
+    private static void merge(int[] arr, int start, int mid, int end) {
+        int right = mid + 1;
+
+        if (arr[mid] <= arr[right]) {
+            return;
+        }
+
+        while ((start <= mid) && (right <= end)) {
+            if (arr[start] <= arr[right]) {
+                start++;
+            } else {
+                int tmp = arr[right];
+                for (int i = (right - start); i > 0; i--) {
+                    arr[i + start] = arr[i + start - 1];
+                }
+                arr[start] = tmp;
+                start++;
+                mid++;
+                right++;
+            }
+        }
+
     }
 }
